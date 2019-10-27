@@ -2,7 +2,7 @@ package com.tidal.tidaltask.domain.artist.model
 
 import java.io.Serializable
 
-data class Artist(
+data class Artist constructor(
     val id: Int? ,
     val name: String?,
     val link: String?,

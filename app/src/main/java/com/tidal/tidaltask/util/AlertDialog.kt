@@ -17,7 +17,6 @@ class AlertDialog {
             dialog.window!!.setBackgroundDrawable(
                 ColorDrawable(Color.TRANSPARENT)
             )
-            dialog.show()
             return dialog
         }
     }

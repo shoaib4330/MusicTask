@@ -58,13 +58,14 @@ class ArtistRecyclerAdapter : RecyclerView.Adapter<ArtistRecyclerAdapter.ArtistV
                 .into(holder.artistImage)
         }
 
-        holder.artistName.setOnClickListener {
+        holder.rootView.setOnClickListener {
             clickListener.onClick(this.artists[position])
         }
     }
 
     /* ----------------------------- ViewHolder class follows ---------------------- */
     class ArtistVH(view: View) : RecyclerView.ViewHolder(view) {
+        val rootView : View = view.rootView
         val artistImage: ImageView = view.ivArtistImage
         val artistName: AppCompatTextView = view.tvArtistName
     }

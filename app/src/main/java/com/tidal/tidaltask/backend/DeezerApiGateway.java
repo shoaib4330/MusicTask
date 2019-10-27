@@ -1,6 +1,6 @@
 package com.tidal.tidaltask.backend;
 
-import com.tidal.tidaltask.domain.album.model.AlbumFindRemoteResponseDTO;
+import com.tidal.tidaltask.domain.album.model.AlbumDTO;
 import com.tidal.tidaltask.domain.album.model.DetailedAlbumResponseDTO;
 import com.tidal.tidaltask.domain.artist.model.dto.ArtistAlbumsResponseDTO;
 import com.tidal.tidaltask.domain.artist.model.dto.ArtistDTO;
@@ -15,13 +15,13 @@ public interface DeezerApiGateway {
 
     /* ------- Album Endpoints ------- */
     @GET(value = "/search/album")
-    Single<Response<AlbumFindRemoteResponseDTO>> queryAlbums(@Query("q") String param);
+    Single<Response<AlbumDTO>> queryAlbums(@Query("q") String param);
 
     @GET(value = "/album/{albumId}/tracks")
     Single<Response<DetailedAlbumResponseDTO>> queryAlbumTracks(@Path("albumId") Integer param);
 
     /* ------ Artist -------- */
-    @GET(value = "/search/artist?order=ARTIST_ASC")
+    @GET(value = "/search/artist")
     Single<Response<ArtistDTO>> queryArtists(@Query("q") String param);
 
     @GET(value = "/artist/{artistId}/albums")

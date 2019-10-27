@@ -27,6 +27,7 @@ abstract class BaseActivity : AppCompatActivity(), BaseFragment.FragmentNavigati
 
     open fun initViews(savedInstanceState: Bundle?) {
         dialog = AlertDialog.progressDialog(this@BaseActivity)
+        dialog?.let { if (it.isShowing) it.dismiss() }
     }
 
     fun onFragmentBackStackChanged() {
@@ -69,7 +70,12 @@ abstract class BaseActivity : AppCompatActivity(), BaseFragment.FragmentNavigati
         replaceFragment(f, R.id.fragment_container, clearBackStack, addToBackstack)
     }
 
-    override fun replaceFragment(f: BaseFragment, layoutId: Int, clearBackStack: Boolean, addToBackstack: Boolean) {
+    override fun replaceFragment(
+        f: BaseFragment,
+        layoutId: Int,
+        clearBackStack: Boolean,
+        addToBackstack: Boolean
+    ) {
         if (clearBackStack) {
             clearFragmentBackStack()
         }
@@ -107,14 +113,14 @@ abstract class BaseActivity : AppCompatActivity(), BaseFragment.FragmentNavigati
 
     override fun showLoadingDialog() {
         dialog?.let {
-            if(!it.isShowing)
+            if (!it.isShowing)
                 it.show()
         }
     }
 
     override fun hideLoadingDialog() {
         dialog?.let {
-            if(it.isShowing)
+            if (it.isShowing)
                 it.dismiss()
         }
     }
