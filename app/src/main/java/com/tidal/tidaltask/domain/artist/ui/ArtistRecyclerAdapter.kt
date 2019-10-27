@@ -14,11 +14,11 @@ import kotlinx.android.synthetic.main.rv_artist_row.view.*
 
 class ArtistRecyclerAdapter : RecyclerView.Adapter<ArtistRecyclerAdapter.ArtistVH> {
 
-    private val context: Context
+    private val context: Context?
     private val clickListener: OnClickListener
     private val artists: MutableList<Artist>
 
-    constructor (context: Context, clickListener: OnClickListener) {
+    constructor (context: Context?, clickListener: OnClickListener) {
         this.clickListener = clickListener
         this.context = context
         this.artists = ArrayList()
@@ -50,18 +50,21 @@ class ArtistRecyclerAdapter : RecyclerView.Adapter<ArtistRecyclerAdapter.ArtistV
     override fun onBindViewHolder(holder: ArtistVH, position: Int) {
         holder.artistName.text = this.artists[position].name
 
-        Glide.with(context)
-            .load(this.artists[position].thumbLink)
-            .into(holder.artistImage)
+        context?.let {
+            Glide.with(context)
+                .load(this.artists[position].picture_medium)
+                .placeholder(android.R.drawable.progress_indeterminate_horizontal)
+                .error(android.R.drawable.stat_notify_error)
+                .into(holder.artistImage)
+        }
 
-        holder.parent.setOnClickListener {
+        holder.artistName.setOnClickListener {
             clickListener.onClick(this.artists[position])
         }
     }
 
     /* ----------------------------- ViewHolder class follows ---------------------- */
     class ArtistVH(view: View) : RecyclerView.ViewHolder(view) {
-        val parent: View = view.itemRoot
         val artistImage: ImageView = view.ivArtistImage
         val artistName: AppCompatTextView = view.tvArtistName
     }

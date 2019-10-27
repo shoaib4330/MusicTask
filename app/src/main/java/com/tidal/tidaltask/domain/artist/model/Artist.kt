@@ -1,13 +1,19 @@
 package com.tidal.tidaltask.domain.artist.model
 
-class Artist {
-    val name: String
-    val age: Int
-    val thumbLink: String
+import java.io.Serializable
 
-    constructor(name: String, age: Int, thumbLink: String) {
-        this.name = name
-        this.age = age
-        this.thumbLink = thumbLink
-    }
-}
+data class Artist(
+    val id: Int? ,
+    val name: String?,
+    val link: String?,
+    val share: String?,
+    val picture: String?,
+    val picture_small: String?,
+    val picture_medium: String?,
+    val picture_big: String,
+    val picture_xl: String?,
+    val nb_album: Int?,
+    val nb_fan: Int?,
+    val radio: Boolean?,
+    val tracklist: String?
+) : Serializable

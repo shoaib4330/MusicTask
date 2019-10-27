@@ -6,6 +6,7 @@ import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.tidal.tidaltask.R
+import com.tidal.tidaltask.util.AlertDialog
 import com.tidal.tidaltask.views.CustomToolbar
 import java.util.*
 
@@ -25,7 +26,7 @@ abstract class BaseActivity : AppCompatActivity(), BaseFragment.FragmentNavigati
     }
 
     open fun initViews(savedInstanceState: Bundle?) {
-
+        dialog = AlertDialog.progressDialog(this@BaseActivity)
     }
 
     fun onFragmentBackStackChanged() {

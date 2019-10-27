@@ -6,7 +6,7 @@ object Constants {
 
 object NetworkConstants {
     /* Remote API Calls (Deezer) Constants*/
-    const val BASE_URL = "api.deezer.com"
+    const val BASE_URL = "http://api.deezer.com"
     const val CONNECTION_TIMEOUT = 10L /* 10 seconds */
     const val REQUEST_FAILURE_MESSAGE = "Oops! Gotta try again"
     const val PAGE_SIZE = 15

@@ -3,7 +3,7 @@ package com.tidal.tidaltask.di.provision
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.tidal.tidaltask.util.NetworkConstants
-import com.tidal.tidaltask.remote.DeezerApiGateway
+import com.tidal.tidaltask.backend.DeezerApiGateway
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

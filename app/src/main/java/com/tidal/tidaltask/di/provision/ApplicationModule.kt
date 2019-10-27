@@ -10,9 +10,6 @@ import javax.inject.Singleton
 @Module
 class ApplicationModule {
 
-//    @ContributesAndroidInjector
-//    abstract fun contributeActivityInjector() : HomeActivity
-
     @Provides
     @Singleton
     fun provideApplicationContext(application: TidalApplication): Context = application.applicationContext
