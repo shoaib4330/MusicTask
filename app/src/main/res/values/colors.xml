@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#F3EDED</color>
+
+    <color name="backgroundColorSearchBar">#FDFAFA</color>
+
+    <color name="textColorPrimary">#FCF7F7</color>
+    <color name="textColorPrimaryInverse">#0F0F0F</color>
+
+    <color name="activityBackground">#000000</color>
+</resources>
