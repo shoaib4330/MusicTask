@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 
 import com.tidal.tidaltask.R
 import com.tidal.tidaltask.base.BaseFragment
+import com.tidal.tidaltask.domain.album.detail.ui.AlbumDetailFragment
 import com.tidal.tidaltask.domain.album.listing.AlbumPresenter
 import com.tidal.tidaltask.domain.album.listing.AlbumView
 import com.tidal.tidaltask.domain.album.model.Album
@@ -24,7 +25,7 @@ class AlbumListingFragment : BaseFragment(), AlbumView,
 
     @Inject
     lateinit var presenter: AlbumPresenter
-    private lateinit var rvAdapter: AlbumRecyclerAdapter
+    private var rvAdapter: AlbumRecyclerAdapter? = null
     private var artistId: Int? = null
     private val gridColumns: Int = 2
 
@@ -51,7 +52,7 @@ class AlbumListingFragment : BaseFragment(), AlbumView,
         setupToolbar()
         rvAlbums.adapter = rvAdapter
         rvAlbums.layoutManager = GridLayoutManager(context, gridColumns)
-        artistId?.also { presenter.getAlbums(it) } ?: run { showError(Constants.ERROR_MESSAGE) }
+        presenter.getAlbums(artistId)
     }
 
     fun setupToolbar() {
@@ -76,7 +77,13 @@ class AlbumListingFragment : BaseFragment(), AlbumView,
     }
 
     override fun onClick(album: Album) {
-        Toast.makeText(context, "album clicked", Toast.LENGTH_SHORT).show()
+        album.id?.let {
+            fragmentHelper.addFragment(
+                AlbumDetailFragment.newInstance(it),
+                false,
+                true
+            )
+        } ?: run { showError(Constants.ERROR_MESSAGE) }
     }
 
     override fun onDestroyView() {

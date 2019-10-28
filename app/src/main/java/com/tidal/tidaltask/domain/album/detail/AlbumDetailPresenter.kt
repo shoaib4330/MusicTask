@@ -1,27 +1,27 @@
-package com.tidal.tidaltask.domain.album.listing
+package com.tidal.tidaltask.domain.album.detail
 
 import com.tidal.tidaltask.backend.DeezerApiGateway
 import com.tidal.tidaltask.backend.NetworkHelper
 import com.tidal.tidaltask.backend.ServiceCallback
 import com.tidal.tidaltask.base.BasePresenter
-import com.tidal.tidaltask.domain.album.model.dto.AlbumsOfArtistResponseDTO
+import com.tidal.tidaltask.domain.album.model.dto.AlbumDetailDTO
 import com.tidal.tidaltask.util.Constants
 import javax.inject.Inject
 
-class AlbumPresenter @Inject constructor(
+class AlbumDetailPresenter @Inject constructor(
     private val deezerApiGateway: DeezerApiGateway,
     private val networkHelper: NetworkHelper
-) : BasePresenter<AlbumView>(), ServiceCallback<AlbumsOfArtistResponseDTO> {
+) : BasePresenter<AlbumDetailView>(), ServiceCallback<AlbumDetailDTO> {
 
-    fun getAlbums(artistId: Int?) {
-        artistId?.let {
+    fun getTracks(albumId: Int?) {
+        albumId?.let {
             view?.onOffProgressBar(true)
-            networkHelper.serviceCall(deezerApiGateway.queryAlbumsOfArtist(artistId), this)
+            networkHelper.serviceCall(deezerApiGateway.queryAlbumTracks(albumId), this)
         } ?: run { view?.showError(Constants.ERROR_MESSAGE) }
     }
 
-    override fun onSuccess(response: AlbumsOfArtistResponseDTO) {
-        view?.showAlbums(response.data)
+    override fun onSuccess(response: AlbumDetailDTO) {
+        view?.displayTracks(response.data)
         view?.onOffProgressBar(false)
     }
 

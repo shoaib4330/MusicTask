@@ -5,6 +5,8 @@ object Constants {
     const val ERROR_MESSAGE = "Something went wrong"
 
     const val ARG_PARAM1 = "artistId"
+
+    const val ARG_PARAM2 = "albumId"
 }
 
 object NetworkConstants {

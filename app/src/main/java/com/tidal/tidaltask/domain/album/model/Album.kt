@@ -5,7 +5,7 @@ import com.tidal.tidaltask.domain.artist.model.Artist
 import java.io.Serializable
 
 data class Album constructor(
-    val id: String?,
+    val id: Int?,
     val title: String?,
     val upc: String?,
     val link: String?,

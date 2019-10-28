@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvTrackPos"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:padding="@dimen/small_50"
+        android:textSize="@dimen/text_size_subheading"
+        android:textColor="@color/textColorSecondary"
+        app:layout_constraintBottom_toBottomOf="@id/tvArtistName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvTrackTitle"
+        app:layout_constraintWidth_percent="0.2"
+        tools:text="10" />
+
+    <TextView
+        android:id="@+id/tvTrackTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:padding="@dimen/small_25"
+        android:textSize="@dimen/text_size_large"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvTrackPos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.8"
+        tools:text="Jay Z" />
+
+    <TextView
+        android:id="@+id/tvArtistName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:padding="@dimen/small_50"
+        android:textSize="@dimen/text_size_subheading"
+        android:textColor="@color/textColorSecondary"
+        app:layout_constraintTop_toBottomOf="@id/tvTrackTitle"
+        app:layout_constraintStart_toStartOf="@id/tvTrackTitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/tvTrackTitle"
+        tools:text="artist A, artist B" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

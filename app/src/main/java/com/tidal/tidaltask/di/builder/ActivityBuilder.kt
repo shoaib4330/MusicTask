@@ -2,6 +2,7 @@ package com.tidal.tidaltask.di.builder
 
 import com.tidal.tidaltask.di.annotations.ActivityScope
 import com.tidal.tidaltask.base.HomeActivity
+import com.tidal.tidaltask.domain.album.detail.ui.AlbumDetailFragment
 import com.tidal.tidaltask.domain.album.listing.ui.AlbumListingFragment
 import com.tidal.tidaltask.domain.artist.ui.SearchArtistFragment
 import dagger.Module
@@ -20,4 +21,8 @@ abstract class ActivityBuilder{
     @ActivityScope
     @ContributesAndroidInjector
     abstract fun contributeAlbumListingFragment() : AlbumListingFragment
+
+    @ActivityScope
+    @ContributesAndroidInjector
+    abstract fun contributeAlbumDetailFragment() : AlbumDetailFragment
 }

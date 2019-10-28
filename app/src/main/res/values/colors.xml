@@ -8,6 +8,7 @@
 
     <color name="textColorPrimary">#FCF7F7</color>
     <color name="textColorPrimaryInverse">#0F0F0F</color>
+    <color name="textColorSecondary">#9C9999</color>
 
     <color name="activityBackground">#000000</color>
 </resources>
