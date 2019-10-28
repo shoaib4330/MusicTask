@@ -27,6 +27,7 @@ class AlbumListingFragment : BaseFragment(), AlbumView,
     lateinit var presenter: AlbumPresenter
     private var rvAdapter: AlbumRecyclerAdapter? = null
     private var artistId: Int? = null
+    private var artistName: String? = null
     private val gridColumns: Int = 2
 
     override fun getLayoutId(): Int = R.layout.fragment_album_listing
@@ -34,8 +35,10 @@ class AlbumListingFragment : BaseFragment(), AlbumView,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (arguments != null)
+        if (arguments != null) {
             artistId = arguments!!.getInt(Constants.ARG_PARAM1)
+            artistName = arguments!!.getString(Constants.ARG_PARAM6)
+        }
 
         toolbarTitle = "Albums"
 
@@ -80,14 +83,14 @@ class AlbumListingFragment : BaseFragment(), AlbumView,
         album.id?.let {
             fragmentHelper.replaceFragment(
                 AlbumDetailFragment.newInstance(
-                    album.id!!,
+                    album.id,
                     album.title,
                     album.cover_xl,
                     album.label,
-                    album.artist?.name
-                ), false, true
+                    artistName
+                ), clearBackStack = false, addToBackstack = true
             )
-        } ?: kotlin.run { showError(Constants.ERROR_MESSAGE)}
+        } ?: kotlin.run { showError(Constants.ERROR_MESSAGE) }
     }
 
     override fun onDestroyView() {
@@ -98,10 +101,11 @@ class AlbumListingFragment : BaseFragment(), AlbumView,
     /* ----- Fragment Creation Factory / Companion ------ */
     companion object {
 
-        fun newInstance(param1: Int): AlbumListingFragment {
+        fun newInstance(param1: Int, param6: String): AlbumListingFragment {
             val fragment = AlbumListingFragment()
             val args = Bundle()
             args.putInt(Constants.ARG_PARAM1, param1)
+            args.putString(Constants.ARG_PARAM6, param6)
             fragment.arguments = args
             return fragment
         }

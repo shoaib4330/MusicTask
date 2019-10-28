@@ -10,15 +10,12 @@ class HomeActivity : BaseFragmentActivity() {
 
     override fun getLayoutId(): Int = R.layout.activity_main
 
-    fun processIntent(){
-        val mBundle = Bundle()
-        mBundle.putString(FRAGMENT_CLASS_NAME, SearchArtistFragment::class.java.name)
-        intent.putExtras(mBundle)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
-        processIntent()
         super.onCreate(savedInstanceState)
-        Toast.makeText(this, "HomeActivity created", Toast.LENGTH_SHORT).show()
+        addFragment(
+            SearchArtistFragment.newInstance(),
+            clearBackStack = false,
+            addToBackstack = false
+        )
     }
 }

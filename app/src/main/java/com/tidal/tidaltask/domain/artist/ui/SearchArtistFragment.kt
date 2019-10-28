@@ -11,6 +11,7 @@ import com.tidal.tidaltask.domain.album.listing.ui.AlbumListingFragment
 import com.tidal.tidaltask.domain.artist.ArtistPresenter
 import com.tidal.tidaltask.domain.artist.ArtistView
 import com.tidal.tidaltask.domain.artist.model.Artist
+import com.tidal.tidaltask.util.Constants
 import kotlinx.android.synthetic.main.search_artist_fragment.*
 import javax.inject.Inject
 
@@ -37,8 +38,8 @@ class SearchArtistFragment : BaseFragment(), ArtistView, ArtistRecyclerAdapter.O
         configureArtistSearchView()
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         toolbar?.hide() // hide the toolbar
     }
 
@@ -51,7 +52,7 @@ class SearchArtistFragment : BaseFragment(), ArtistView, ArtistRecyclerAdapter.O
     }
 
     override fun showError(message: String) {
-        Toast.makeText(context, "showError called", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onOffProgressBar(toShow: Boolean) {
@@ -62,17 +63,18 @@ class SearchArtistFragment : BaseFragment(), ArtistView, ArtistRecyclerAdapter.O
     }
 
     override fun onClick(artist: Artist) {
-        Toast.makeText(context, "Artist List OnClick() called", Toast.LENGTH_SHORT).show()
         artist.id?.let {
-            fragmentHelper.addFragment(
-                AlbumListingFragment.newInstance(artist.id),
-                false,
-                true
+            fragmentHelper.replaceFragment(
+                AlbumListingFragment.newInstance(artist.id, artist.name!!),
+                clearBackStack = false,
+                addToBackstack = true
             )
         }
     }
 
     private fun configureArtistSearchView() {
+        svArtistSearch?.setOnClickListener { svArtistSearch?.onActionViewExpanded() }
+
         svArtistSearch?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             private val handler: Handler = Handler()
@@ -87,7 +89,7 @@ class SearchArtistFragment : BaseFragment(), ArtistView, ArtistRecyclerAdapter.O
                     when {
                         it.length > 1 -> {
                             handler.removeCallbacks(null) // cancel previously sent messages
-                            handler.postDelayed({ presenter.findArtists(it) }, 1000L)
+                            handler.postDelayed({ presenter.findArtists(it) }, 3000L)
                         }
                         it.isBlank() -> clearArtistsList()
                         else -> {
@@ -100,4 +102,10 @@ class SearchArtistFragment : BaseFragment(), ArtistView, ArtistRecyclerAdapter.O
         })
     }
 
+    /* ----- Fragment Creation Factory / Companion ------ */
+    companion object {
+        fun newInstance(): SearchArtistFragment {
+            return SearchArtistFragment()
+        }
+    }
 }
