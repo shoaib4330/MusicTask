@@ -10,14 +10,14 @@
         android:id="@+id/tvTrackPos"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:padding="@dimen/small_50"
-        android:textSize="@dimen/text_size_subheading"
         android:textColor="@color/textColorSecondary"
+        android:textSize="@dimen/text_size_subheading"
         app:layout_constraintBottom_toBottomOf="@id/tvArtistName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/tvTrackTitle"
-        app:layout_constraintWidth_percent="0.2"
+        app:layout_constraintWidth_percent="0.12"
         tools:text="10" />
 
     <TextView
@@ -27,11 +27,11 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:padding="@dimen/small_25"
-        android:textSize="@dimen/text_size_large"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tvTrackPos"
+        android:textSize="@dimen/text_size_medium"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintStart_toEndOf="@id/tvTrackPos"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.88"
         tools:text="Jay Z" />
 
     <TextView
@@ -41,12 +41,12 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:padding="@dimen/small_50"
-        android:textSize="@dimen/text_size_subheading"
         android:textColor="@color/textColorSecondary"
-        app:layout_constraintTop_toBottomOf="@id/tvTrackTitle"
-        app:layout_constraintStart_toStartOf="@id/tvTrackTitle"
+        android:textSize="@dimen/text_size_subheading"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/tvTrackTitle"
+        app:layout_constraintStart_toStartOf="@id/tvTrackTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvTrackTitle"
         tools:text="artist A, artist B" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

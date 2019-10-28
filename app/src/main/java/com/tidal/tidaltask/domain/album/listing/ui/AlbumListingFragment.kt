@@ -78,12 +78,16 @@ class AlbumListingFragment : BaseFragment(), AlbumView,
 
     override fun onClick(album: Album) {
         album.id?.let {
-            fragmentHelper.addFragment(
-                AlbumDetailFragment.newInstance(it),
-                false,
-                true
+            fragmentHelper.replaceFragment(
+                AlbumDetailFragment.newInstance(
+                    album.id!!,
+                    album.title,
+                    album.cover_xl,
+                    album.label,
+                    album.artist?.name
+                ), false, true
             )
-        } ?: run { showError(Constants.ERROR_MESSAGE) }
+        } ?: kotlin.run { showError(Constants.ERROR_MESSAGE)}
     }
 
     override fun onDestroyView() {
