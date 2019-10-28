@@ -2,7 +2,10 @@ package com.tidal.tidaltask.domain.artist.ui
 
 import android.os.Bundle
 import android.os.Handler
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import com.tidal.tidaltask.R
@@ -11,8 +14,8 @@ import com.tidal.tidaltask.domain.album.listing.ui.AlbumListingFragment
 import com.tidal.tidaltask.domain.artist.ArtistPresenter
 import com.tidal.tidaltask.domain.artist.ArtistView
 import com.tidal.tidaltask.domain.artist.model.Artist
-import com.tidal.tidaltask.util.Constants
 import kotlinx.android.synthetic.main.search_artist_fragment.*
+import java.util.*
 import javax.inject.Inject
 
 class SearchArtistFragment : BaseFragment(), ArtistView, ArtistRecyclerAdapter.OnClickListener {
@@ -23,6 +26,8 @@ class SearchArtistFragment : BaseFragment(), ArtistView, ArtistRecyclerAdapter.O
     lateinit var presenter: ArtistPresenter
 
     private lateinit var rvAdapter: ArtistRecyclerAdapter
+
+    private val handler: Handler = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,30 +80,38 @@ class SearchArtistFragment : BaseFragment(), ArtistView, ArtistRecyclerAdapter.O
     private fun configureArtistSearchView() {
         svArtistSearch?.setOnClickListener { svArtistSearch?.onActionViewExpanded() }
 
-        svArtistSearch?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        val searchEditText: EditText? =
+            svArtistSearch?.findViewById((androidx.appcompat.R.id.search_src_text))
 
-            private val handler: Handler = Handler()
+        searchEditText?.addTextChangedListener(object : TextWatcher {
 
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                query?.let { presenter.findArtists(query) }
-                return true // report action handled
-            }
+            var timer: Timer? = null
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                newText?.let {
-                    when {
-                        it.length > 1 -> {
-                            handler.removeCallbacks(null) // cancel previously sent messages
-                            handler.postDelayed({ presenter.findArtists(it) }, 3000L)
-                        }
-                        it.isBlank() -> clearArtistsList()
-                        else -> {
-                            // when length is one, lets not do anything
-                        }
+            override fun afterTextChanged(p0: Editable?) {
+                val text: String? = p0?.toString() // get the text
+                timer = Timer() // user typed something, start timer
+                timer!!.schedule(object : TimerTask() {
+                    override fun run() {
+                        text?.let {
+                            when {
+                                it.isNotEmpty() -> {
+                                    handler.post {presenter.findArtists(it)}
+                                }
+                                else -> handler.post{clearArtistsList()}
+                            }
+                        } ?: handler.post{clearArtistsList()}
                     }
-                } ?: clearArtistsList()
-                return true // report action handled
+                }, 600)
             }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                // do nothing here
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                timer?.cancel() // user is typing, cancel already started timers
+            }
+
         })
     }
 

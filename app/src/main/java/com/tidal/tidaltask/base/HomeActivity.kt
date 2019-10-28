@@ -12,6 +12,7 @@ class HomeActivity : BaseFragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // load the initial fragment
         addFragment(
             SearchArtistFragment.newInstance(),
             clearBackStack = false,
