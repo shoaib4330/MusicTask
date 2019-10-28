@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.appcompat.app.ActionBar
 import com.tidal.tidaltask.util.Constants
 import com.tidal.tidaltask.views.CustomToolbar
 import dagger.android.support.DaggerFragment
@@ -16,7 +17,7 @@ abstract class BaseFragment: DaggerFragment() {
 
     lateinit var fragmentHelper: FragmentNavigationHelper
 
-    var toolbar: CustomToolbar? = null
+    var toolbar: ActionBar? = null
 
     private var v: View? = null
 
@@ -27,7 +28,7 @@ abstract class BaseFragment: DaggerFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         try {
             fragmentHelper = context as FragmentNavigationHelper
-            toolbar = fragmentHelper.getCustomToolbar()
+            toolbar = fragmentHelper.getToolbar()
         } catch (e: Exception) {
             //log(e.toString())
         }
@@ -102,14 +103,10 @@ abstract class BaseFragment: DaggerFragment() {
 
         fun clearFragmentBackStack()
 
-        fun updateToolbarTitle(title: String)
-
         fun showLoadingDialog()
 
         fun hideLoadingDialog()
 
-        fun onBack()
-
-        fun getCustomToolbar(): CustomToolbar
+        fun getToolbar(): ActionBar?
     }
 }

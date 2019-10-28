@@ -23,6 +23,8 @@
         android:textSize="@dimen/text_size_medium"
         android:layout_marginLeft="@dimen/small_200"
         android:layout_marginStart="@dimen/small_200"
+        android:ellipsize="end"
+        android:maxLines="1"
         app:layout_constraintStart_toEndOf="@+id/ivArtistImage"
         app:layout_constraintTop_toTopOf="@+id/ivArtistImage"
         app:layout_constraintBottom_toBottomOf="@+id/ivArtistImage" />

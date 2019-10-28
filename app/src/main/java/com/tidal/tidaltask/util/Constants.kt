@@ -2,6 +2,9 @@ package com.tidal.tidaltask.util
 
 object Constants {
     const val EMPTY_STRING = ""
+    const val ERROR_MESSAGE = "Something went wrong"
+
+    const val ARG_PARAM1 = "artistId"
 }
 
 object NetworkConstants {

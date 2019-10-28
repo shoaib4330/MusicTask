@@ -19,7 +19,6 @@ class HomeActivity : BaseFragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         processIntent()
         super.onCreate(savedInstanceState)
-        //AndroidInjection.inject(this)
         Toast.makeText(this, "HomeActivity created", Toast.LENGTH_SHORT).show()
     }
 }

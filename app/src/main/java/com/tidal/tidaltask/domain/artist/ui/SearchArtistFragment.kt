@@ -2,14 +2,12 @@ package com.tidal.tidaltask.domain.artist.ui
 
 import android.os.Bundle
 import android.os.Handler
-import android.text.TextWatcher
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import com.tidal.tidaltask.R
 import com.tidal.tidaltask.base.BaseFragment
+import com.tidal.tidaltask.domain.album.ui.AlbumListingFragment
 import com.tidal.tidaltask.domain.artist.ArtistPresenter
 import com.tidal.tidaltask.domain.artist.ArtistView
 import com.tidal.tidaltask.domain.artist.model.Artist
@@ -25,41 +23,59 @@ class SearchArtistFragment : BaseFragment(), ArtistView, ArtistRecyclerAdapter.O
 
     private lateinit var rvAdapter: ArtistRecyclerAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val v: View? = super.onCreateView(inflater, container, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-        rvAdapter = ArtistRecyclerAdapter(
-            context = context,
-            clickListener = this
-        )
+        rvAdapter = ArtistRecyclerAdapter(context = context, clickListener = this)
 
-        return v
+        presenter.attachView(this)
     }
 
     override fun initViews(parent: View, savedInstanceState: Bundle?) {
         super.initViews(parent, savedInstanceState)
         rv_artists.adapter = rvAdapter
-        initiate()
-    }
-
-    private fun initiate() {
         configureArtistSearchView()
-        presenter.attachView(this)
-        //presenter.findArtists("eminem")
     }
 
-    private fun clearArtistsList(){
+    override fun onResume() {
+        super.onResume()
+        toolbar?.hide() // hide the toolbar
+    }
+
+    private fun clearArtistsList() {
         this.rvAdapter?.clearData()
+    }
+
+    override fun showArtists(artists: List<Artist>) {
+        this.rvAdapter.setData(artists, true)
+    }
+
+    override fun showError(message: String) {
+        Toast.makeText(context, "showError called", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onOffProgressBar(toShow: Boolean) {
+        if (toShow)
+            fragmentHelper.showLoadingDialog()
+        else
+            fragmentHelper.hideLoadingDialog()
+    }
+
+    override fun onClick(artist: Artist) {
+        Toast.makeText(context, "Artist List OnClick() called", Toast.LENGTH_SHORT).show()
+        artist.id?.let {
+            fragmentHelper.addFragment(
+                AlbumListingFragment.newInstance(artist.id),
+                false,
+                true
+            )
+        }
     }
 
     private fun configureArtistSearchView() {
         svArtistSearch?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
-            private val handler : Handler = Handler()
+            private val handler: Handler = Handler()
 
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let { presenter.findArtists(query) }
@@ -84,22 +100,4 @@ class SearchArtistFragment : BaseFragment(), ArtistView, ArtistRecyclerAdapter.O
         })
     }
 
-    override fun showArtists(artists: List<Artist>) {
-        this.rvAdapter.setData(artists, true)
-    }
-
-    override fun showError(message: String) {
-        Toast.makeText(context, "showError called", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onOffProgressBar(toShow: Boolean) {
-        if (toShow)
-            fragmentHelper.showLoadingDialog()
-        else
-            fragmentHelper.hideLoadingDialog()
-    }
-
-    override fun onClick(artist: Artist) {
-        Toast.makeText(context, "Artist List OnClick() called", Toast.LENGTH_SHORT).show()
-    }
 }

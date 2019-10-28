@@ -2,7 +2,9 @@ package com.tidal.tidaltask.base
 
 import android.app.Dialog
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.Window
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.tidal.tidaltask.R
@@ -14,7 +16,7 @@ abstract class BaseActivity : AppCompatActivity(), BaseFragment.FragmentNavigati
 
     private var currentFragment: BaseFragment? = null
     private val fragments = Stack<Fragment>()
-    private var dialog: Dialog? = null;
+    private var dialog: Dialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,6 +95,16 @@ abstract class BaseActivity : AppCompatActivity(), BaseFragment.FragmentNavigati
         onFragmentBackStackChanged()
     }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        item?.let {
+            if (it.itemId == android.R.id.home) {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun clearFragmentBackStack() {
         val fm = supportFragmentManager
         for (index in 0 until fm.backStackEntryCount) {
@@ -105,10 +117,6 @@ abstract class BaseActivity : AppCompatActivity(), BaseFragment.FragmentNavigati
             fragments.clear()
             fragments.push(homeScreenFragment)
         }
-    }
-
-    override fun updateToolbarTitle(title: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showLoadingDialog() {
@@ -125,11 +133,7 @@ abstract class BaseActivity : AppCompatActivity(), BaseFragment.FragmentNavigati
         }
     }
 
-    override fun onBack() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun getCustomToolbar(): CustomToolbar {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getToolbar(): ActionBar? {
+        return supportActionBar
     }
 }

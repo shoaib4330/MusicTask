@@ -8,7 +8,7 @@ import dagger.android.AndroidInjection
 import dagger.android.DispatchingAndroidInjector
 import javax.inject.Inject
 
-open class BaseFragmentActivity : BaseToolbarActivity() {
+open class BaseFragmentActivity : BaseActivity() {
 
     @Inject
     lateinit var supportFragmentInjector: DispatchingAndroidInjector<Fragment>
@@ -33,10 +33,6 @@ open class BaseFragmentActivity : BaseToolbarActivity() {
             }
         }
 
-        findViewById<CustomToolbar>(R.id.layout_toolbar)?.let {
-            setUpToolbar(it)
-        }
-
         supportFragmentManager.addOnBackStackChangedListener {
             //todo: no onBackStackChange event actions listed in supportFragmentManager
         }
@@ -45,10 +41,4 @@ open class BaseFragmentActivity : BaseToolbarActivity() {
     companion object {
         const val FRAGMENT_CLASS_NAME = "fragment_class_name"
     }
-
-    override fun updateToolbarTitle(title: String) {
-        super.updateToolbarTitle(title)
-        setToolBarTitle(title)
-    }
-
 }
