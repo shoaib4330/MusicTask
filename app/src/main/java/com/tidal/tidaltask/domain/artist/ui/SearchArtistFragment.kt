@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import com.tidal.tidaltask.R
 import com.tidal.tidaltask.base.BaseFragment
-import com.tidal.tidaltask.domain.album.ui.AlbumListingFragment
+import com.tidal.tidaltask.domain.album.listing.ui.AlbumListingFragment
 import com.tidal.tidaltask.domain.artist.ArtistPresenter
 import com.tidal.tidaltask.domain.artist.ArtistView
 import com.tidal.tidaltask.domain.artist.model.Artist

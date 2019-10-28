@@ -1,4 +1,4 @@
-package com.tidal.tidaltask.domain.album.ui
+package com.tidal.tidaltask.domain.album.listing.ui
 
 import android.content.Context
 import android.view.LayoutInflater

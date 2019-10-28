@@ -1,4 +1,4 @@
-package com.tidal.tidaltask.domain.album
+package com.tidal.tidaltask.domain.album.listing
 
 import com.tidal.tidaltask.backend.DeezerApiGateway
 import com.tidal.tidaltask.backend.NetworkHelper

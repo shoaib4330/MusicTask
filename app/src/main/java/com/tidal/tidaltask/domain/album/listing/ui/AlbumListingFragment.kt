@@ -1,29 +1,26 @@
-package com.tidal.tidaltask.domain.album.ui
+package com.tidal.tidaltask.domain.album.listing.ui
 
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 
 import com.tidal.tidaltask.R
 import com.tidal.tidaltask.base.BaseFragment
-import com.tidal.tidaltask.domain.album.AlbumPresenter
-import com.tidal.tidaltask.domain.album.AlbumView
+import com.tidal.tidaltask.domain.album.listing.AlbumPresenter
+import com.tidal.tidaltask.domain.album.listing.AlbumView
 import com.tidal.tidaltask.domain.album.model.Album
 import com.tidal.tidaltask.util.Constants
 import kotlinx.android.synthetic.main.fragment_album_listing.*
-import kotlinx.android.synthetic.main.search_artist_fragment.*
 import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
  */
-class AlbumListingFragment : BaseFragment(), AlbumView, AlbumRecyclerAdapter.OnClickListener {
+class AlbumListingFragment : BaseFragment(), AlbumView,
+    AlbumRecyclerAdapter.OnClickListener {
 
     @Inject
     lateinit var presenter: AlbumPresenter
@@ -41,7 +38,10 @@ class AlbumListingFragment : BaseFragment(), AlbumView, AlbumRecyclerAdapter.OnC
 
         toolbarTitle = "Albums"
 
-        rvAdapter = AlbumRecyclerAdapter(context = context, clickListener = this)
+        rvAdapter = AlbumRecyclerAdapter(
+            context = context,
+            clickListener = this
+        )
 
         presenter.attachView(this)
     }
