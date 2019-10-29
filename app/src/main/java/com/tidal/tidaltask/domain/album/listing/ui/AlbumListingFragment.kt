@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.tidal.tidaltask.R
 import com.tidal.tidaltask.base.BaseFragment
 import com.tidal.tidaltask.domain.album.detail.ui.AlbumDetailFragment
-import com.tidal.tidaltask.domain.album.listing.AlbumPresenter
+import com.tidal.tidaltask.domain.album.listing.AlbumListingPresenter
 import com.tidal.tidaltask.domain.album.listing.AlbumView
 import com.tidal.tidaltask.domain.album.model.Album
 import com.tidal.tidaltask.util.Constants
@@ -24,7 +24,7 @@ class AlbumListingFragment : BaseFragment(), AlbumView,
     AlbumRecyclerAdapter.OnClickListener {
 
     @Inject
-    lateinit var presenter: AlbumPresenter
+    lateinit var presenter: AlbumListingPresenter
     private var rvAdapter: AlbumRecyclerAdapter? = null
     private var artistId: Int? = null
     private var artistName: String? = null
@@ -44,7 +44,8 @@ class AlbumListingFragment : BaseFragment(), AlbumView,
 
         rvAdapter = AlbumRecyclerAdapter(
             context = context,
-            clickListener = this
+            clickListener = this,
+            artistName = this.artistName
         )
 
         presenter.attachView(this)

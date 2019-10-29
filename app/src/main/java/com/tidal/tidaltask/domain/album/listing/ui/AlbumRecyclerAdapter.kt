@@ -14,7 +14,8 @@ import kotlinx.android.synthetic.main.rv_album_row.view.*
 
 class AlbumRecyclerAdapter(
     private val context: Context?,
-    private val clickListener: OnClickListener
+    private val clickListener: OnClickListener,
+    private val artistName: String?
 ) : RecyclerView.Adapter<AlbumRecyclerAdapter.AlbumVH>() {
 
     private val albums: MutableList<Album>
@@ -48,7 +49,8 @@ class AlbumRecyclerAdapter(
         val album = this.albums[position]
 
         holder.albumTitle.text = album.title
-        album.artist?.let { holder.artistName.text = album.artist.name }
+
+        this.artistName?.let { holder.artistName.text = it }
 
         context?.let {
             Glide.with(context)

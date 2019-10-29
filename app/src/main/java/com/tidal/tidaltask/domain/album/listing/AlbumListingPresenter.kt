@@ -8,7 +8,7 @@ import com.tidal.tidaltask.domain.album.model.dto.AlbumsOfArtistResponseDTO
 import com.tidal.tidaltask.util.Constants
 import javax.inject.Inject
 
-class AlbumPresenter @Inject constructor(
+class AlbumListingPresenter @Inject constructor(
     private val deezerApiGateway: DeezerApiGateway,
     private val networkHelper: NetworkHelper
 ) : BasePresenter<AlbumView>(), ServiceCallback<AlbumsOfArtistResponseDTO> {

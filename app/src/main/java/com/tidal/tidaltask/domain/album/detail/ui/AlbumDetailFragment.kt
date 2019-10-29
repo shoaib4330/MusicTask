@@ -1,29 +1,19 @@
 package com.tidal.tidaltask.domain.album.detail.ui
 
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.view.Window
 import android.widget.Toast
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 
 import com.tidal.tidaltask.R
 import com.tidal.tidaltask.base.BaseFragment
 import com.tidal.tidaltask.domain.album.detail.AlbumDetailPresenter
 import com.tidal.tidaltask.domain.album.detail.AlbumDetailView
-import com.tidal.tidaltask.domain.album.listing.AlbumPresenter
-import com.tidal.tidaltask.domain.album.listing.ui.AlbumRecyclerAdapter
 import com.tidal.tidaltask.domain.album.model.Track
 import com.tidal.tidaltask.util.Constants
 import kotlinx.android.synthetic.main.fragment_album_detail.*
-import kotlinx.android.synthetic.main.fragment_album_listing.*
 import javax.inject.Inject
 
 /**
