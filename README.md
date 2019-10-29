@@ -9,10 +9,11 @@ An application that precisely does the following tasks:
 
 # Design and Dependencies
 - I opted for Model View Presenter (MVP)
-  - Could have gone for MVVM, but since it a minor app, And doesn't use persistence (e.g ROOM)
+  - Could have gone for MVVM, but since its a minor app, And doesn't use persistence (e.g ROOM), so both would do good.
 
 - Mostly Kotlin (1 or 2 classes in Java)
 - OkHttp, Retrofit, RxJava
 - Dagger for injection
 - For loading images, using Glide
 - View dependencies, such as Recycler view (obvious ones)
+- Mockito, Junit for testing
