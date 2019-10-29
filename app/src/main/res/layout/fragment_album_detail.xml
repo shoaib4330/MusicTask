@@ -70,6 +70,7 @@
             android:id="@+id/rvTracks"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/small_100"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@+id/tvVolume"
             app:layout_constraintBottom_toBottomOf="parent"
