@@ -9,7 +9,8 @@
     <androidx.appcompat.widget.SearchView
         android:id="@+id/svArtistSearch"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="H, 7:1"
         android:layout_margin="@dimen/small_175"
         android:background="@color/backgroundColorSearchBar"
         android:padding="@dimen/small_25"
