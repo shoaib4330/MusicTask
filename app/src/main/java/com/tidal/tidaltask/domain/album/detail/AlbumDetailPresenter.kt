@@ -16,7 +16,7 @@ class AlbumDetailPresenter @Inject constructor(
     fun getTracks(albumId: Int?) {
         albumId?.let {
             view?.onOffProgressBar(true)
-            networkHelper.serviceCall(deezerApiGateway.queryAlbumTracks(albumId), this)
+            networkHelper.remoteCall(deezerApiGateway.queryAlbumTracks(albumId), this)
         } ?: run { view?.showError(Constants.ERROR_MESSAGE) }
     }
 

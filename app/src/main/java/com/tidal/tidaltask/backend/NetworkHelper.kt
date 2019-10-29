@@ -1,6 +1,5 @@
 package com.tidal.tidaltask.backend
 
-import com.google.gson.Gson
 import com.tidal.tidaltask.util.Constants
 import com.tidal.tidaltask.util.NetworkConstants
 import io.reactivex.Single
@@ -14,14 +13,22 @@ import javax.inject.Inject
 
 interface ServiceCallback<T> {
     fun onSuccess(response: T)
-    fun onFailure(error: String, statusCode: Int = 0, errorCodeString: String = Constants.EMPTY_STRING)
+    fun onFailure(
+        error: String,
+        statusCode: Int = 0,
+        errorCodeString: String = Constants.EMPTY_STRING
+    )
 }
 
 class NetworkHelper @Inject constructor() {
 
-    var disposable: Disposable? = null
+    var disposable: Disposable?
 
-    fun <T> serviceCall(call: Single<Response<T>>, callback: ServiceCallback<T>) {
+    init {
+        disposable = null
+    }
+
+    fun <T> remoteCall(call: Single<Response<T>>, callback: ServiceCallback<T>) {
         call.subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : SingleObserver<Response<T>> {

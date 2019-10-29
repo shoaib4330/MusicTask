@@ -4,10 +4,10 @@ import com.tidal.tidaltask.backend.DeezerApiGateway
 import com.tidal.tidaltask.backend.NetworkHelper
 import com.tidal.tidaltask.backend.ServiceCallback
 import com.tidal.tidaltask.base.BasePresenter
-import com.tidal.tidaltask.domain.artist.model.dto.ArtistDTO
+import com.tidal.tidaltask.domain.artist.model.dto.SearchArtistResponseDTO
 import javax.inject.Inject
 
-class ArtistPresenter : BasePresenter<ArtistView>, ServiceCallback<ArtistDTO> {
+class SearchArtistPresenter : BasePresenter<ArtistView>, ServiceCallback<SearchArtistResponseDTO> {
 
     private val deezerApiGateway: DeezerApiGateway
     private val networkHelper: NetworkHelper
@@ -19,13 +19,14 @@ class ArtistPresenter : BasePresenter<ArtistView>, ServiceCallback<ArtistDTO> {
     }
 
     fun findArtists(searchParam: String) {
-        searchParam?.let {
-            view?.onOffProgressBar(true)
-            networkHelper.serviceCall(deezerApiGateway.queryArtists(searchParam), this)
-        }
+        if (searchParam.isNotBlank())
+            searchParam.let {
+                view?.onOffProgressBar(true)
+                networkHelper.remoteCall(deezerApiGateway.queryArtists(searchParam), this)
+            }
     }
 
-    override fun onSuccess(response: ArtistDTO) {
+    override fun onSuccess(response: SearchArtistResponseDTO) {
         view?.showArtists(response.data)
         view?.onOffProgressBar(false)
     }

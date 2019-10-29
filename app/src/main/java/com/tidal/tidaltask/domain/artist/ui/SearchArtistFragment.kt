@@ -7,11 +7,10 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.widget.SearchView
 import com.tidal.tidaltask.R
 import com.tidal.tidaltask.base.BaseFragment
 import com.tidal.tidaltask.domain.album.listing.ui.AlbumListingFragment
-import com.tidal.tidaltask.domain.artist.ArtistPresenter
+import com.tidal.tidaltask.domain.artist.SearchArtistPresenter
 import com.tidal.tidaltask.domain.artist.ArtistView
 import com.tidal.tidaltask.domain.artist.model.Artist
 import kotlinx.android.synthetic.main.search_artist_fragment.*
@@ -23,7 +22,7 @@ class SearchArtistFragment : BaseFragment(), ArtistView, ArtistRecyclerAdapter.O
     override fun getLayoutId(): Int = R.layout.search_artist_fragment
 
     @Inject
-    lateinit var presenter: ArtistPresenter
+    lateinit var presenter: SearchArtistPresenter
 
     private lateinit var rvAdapter: ArtistRecyclerAdapter
 

@@ -2,7 +2,7 @@ package com.tidal.tidaltask.backend;
 
 import com.tidal.tidaltask.domain.album.model.dto.AlbumDetailDTO;
 import com.tidal.tidaltask.domain.album.model.dto.AlbumsOfArtistResponseDTO;
-import com.tidal.tidaltask.domain.artist.model.dto.ArtistDTO;
+import com.tidal.tidaltask.domain.artist.model.dto.SearchArtistResponseDTO;
 
 import io.reactivex.Single;
 import retrofit2.Response;
@@ -21,7 +21,7 @@ public interface DeezerApiGateway {
 
     /* ------ Artist -------- */
     @GET(value = "/search/artist")
-    Single<Response<ArtistDTO>> queryArtists(@Query("q") String param);
+    Single<Response<SearchArtistResponseDTO>> queryArtists(@Query("q") String param);
 
     @GET(value = "/artist/{artistId}/albums")
     Single<Response<AlbumsOfArtistResponseDTO>> queryAlbumsOfArtist(@Path("artistId") Integer param);
