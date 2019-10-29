@@ -11,7 +11,7 @@ import javax.inject.Inject
 class AlbumListingPresenter @Inject constructor(
     private val deezerApiGateway: DeezerApiGateway,
     private val networkHelper: NetworkHelper
-) : BasePresenter<AlbumView>(), ServiceCallback<AlbumsOfArtistResponseDTO> {
+) : BasePresenter<AlbumListingView>(), ServiceCallback<AlbumsOfArtistResponseDTO> {
 
     fun getAlbums(artistId: Int?) {
         artistId?.let {

@@ -11,7 +11,7 @@ import com.tidal.tidaltask.R
 import com.tidal.tidaltask.base.BaseFragment
 import com.tidal.tidaltask.domain.album.detail.ui.AlbumDetailFragment
 import com.tidal.tidaltask.domain.album.listing.AlbumListingPresenter
-import com.tidal.tidaltask.domain.album.listing.AlbumView
+import com.tidal.tidaltask.domain.album.listing.AlbumListingView
 import com.tidal.tidaltask.domain.album.model.Album
 import com.tidal.tidaltask.util.Constants
 import kotlinx.android.synthetic.main.fragment_album_listing.*
@@ -20,7 +20,7 @@ import javax.inject.Inject
 /**
  * A simple [Fragment] subclass.
  */
-class AlbumListingFragment : BaseFragment(), AlbumView,
+class AlbumListingFragment : BaseFragment(), AlbumListingView,
     AlbumRecyclerAdapter.OnClickListener {
 
     @Inject
