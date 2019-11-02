@@ -46,7 +46,7 @@ class TestArtistSearchPresenter {
     }
 
     @Test
-    fun when_findArtists_successResponse() {
+    fun `when findArtists successResponse`() {
         val responseDTO : SearchArtistResponseDTO = mock(SearchArtistResponseDTO::class.java)
 
         Mockito.`when`(deezerApiGateway.queryArtists(anyString())).thenReturn(artistNetworkCallSingle)
@@ -58,7 +58,7 @@ class TestArtistSearchPresenter {
     }
 
     @Test
-    fun when_findArtist_emptySearchString_doesNothing(){
+    fun `when findArtists emptySearchString doesNothing`(){
         searchArtistSearchPresenter.findArtists("")
         Mockito.verifyZeroInteractions(networkHelper)
         Mockito.verifyZeroInteractions(searchArtistView)

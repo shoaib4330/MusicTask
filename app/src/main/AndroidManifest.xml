@@ -13,6 +13,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".base.HomeActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/ActionBarLessActivityTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

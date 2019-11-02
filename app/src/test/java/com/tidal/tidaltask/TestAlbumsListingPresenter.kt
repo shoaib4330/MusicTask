@@ -50,7 +50,7 @@ class TestAlbumsListingPresenter {
     }
 
     @Test
-    fun when_findAlbums_successResponse() {
+    fun `when findAlbums successResponse`() {
         val responseDTO : AlbumsOfArtistResponseDTO =
             Mockito.mock(AlbumsOfArtistResponseDTO::class.java)
 
@@ -63,7 +63,7 @@ class TestAlbumsListingPresenter {
     }
 
     @Test
-    fun when_findAlbums_fails(){
+    fun `when findAlbums fails`(){
         val responseDTO : AlbumsOfArtistResponseDTO =
             Mockito.mock(AlbumsOfArtistResponseDTO::class.java)
 
@@ -76,7 +76,7 @@ class TestAlbumsListingPresenter {
     }
 
     @Test
-    fun when_findAlbums_nullId_doesNothing(){
+    fun `when findAlbums nullId doesNothing`(){
         albumListingPresenter.getAlbums(null)
         Mockito.verifyZeroInteractions(networkHelper)
         Mockito.verify(albumListingView, times(1)).showError(errorMessage)
